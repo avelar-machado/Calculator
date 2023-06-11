@@ -30,7 +30,7 @@
                 <button class="btn">(</button>
                 <button class="btn">)</button>
                 <button class="btn">%</button>
-                <button id="del" onclick="del()">DEL</button>
+                <button id="del" onclick="dele()">DEL</button>
                 <button id="ac" onclick="screen.value='', screenHistory.value=''">AC</button>
             </div>
 
@@ -158,17 +158,17 @@
 
     /*============ Função Expoente ============*/
     function pow() {
-        screen.value += Math.pow(Number(screen.value), 2);
+        screen.value = Math.pow(Number(screen.value), 2);
     }
 
     /*============ Função Raiz Quadrada ============*/
     function sqrt() {
-        screen.value += Math.sqrt(Number(screen.value), 2);
+        screen.value = Math.sqrt(Number(screen.value), 2);
     }
 
     /*============ Função Logarítmica ============*/
     function log() {
-        screen.value += Math.log(Number(screen.value));
+        screen.value = Math.log(Number(screen.value));
     }
 
     /*============ Função PI(π) ============*/
@@ -196,7 +196,7 @@
     }
 
     /*============ Função Delete (Del) ============*/
-    function del() {
+    function dele() {
         screen.value = screen.value.substr(0, screen.value.length - 1);
         screenHistory.value = screen.value;
     }

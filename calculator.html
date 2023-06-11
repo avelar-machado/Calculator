@@ -14,22 +14,27 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" id="mybody">
         <div class="display">
-            <input id="screen" type="text" placeholder="0">
+            <input id="screen" type="text" placeholder="0" />
+        </div>
+
+        <div class="display">
+            <button id="changeName" onclick="changeLanguage()"> Portuguese </button>
+            <input id="screenHistory" type="text" placeholder="0" disabled />
         </div>
 
         <div class="btns">
-            <div class="row">
+            <div class="row myrow">
                 <button onclick="fact()">x!</button>
                 <button class="btn">(</button>
                 <button class="btn">)</button>
                 <button class="btn">%</button>
                 <button id="del" onclick="del()">DEL</button>
-                <button id="ac" onclick="screen.value=''">AC</button>
+                <button id="ac" onclick="screen.value='', screenHistory.value=''">AC</button>
             </div>
 
-            <div class="row">
+            <div class="row myrow">
                 <button onclick="sin()">sin</button>
                 <button onclick="pi()">π</button>
                 <button class="btn">7</button>
@@ -38,7 +43,7 @@
                 <button class="btn">÷</button>
             </div>
 
-            <div class="row">
+            <div class="row myrow">
                 <button onclick="cos()">cos</button>
                 <button onclick="log()">log</button>
                 <button class="btn">4</button>
@@ -47,7 +52,7 @@
                 <button class="btn">×</button>
             </div>
 
-            <div class="row">
+            <div class="row myrow">
                 <button onclick="tan()">tan</button>
                 <button onclick="sqrt()">√</button>
                 <button class="btn">1</button>
@@ -56,7 +61,7 @@
                 <button class="btn">-</button>
             </div>
 
-            <div class="row">
+            <div class="row myrow">
                 <button onclick="e()">e</button>
                 <button onclick="pow()">x <span style="position: relative; bottom: .4em; right: .1em;">y</span>
                 </button>
@@ -66,15 +71,39 @@
                 <button class="btn">+</button>
             </div>
         </div>
+
+        <div class="row" id="mycolor">
+            <button class="btn" style="background-color: rgb(232, 198, 198);"
+                onclick="changeColor('rgb(232, 198, 198)')"></button>
+            <button class="btn" style="background-color: rgb(115, 204, 198);"
+                onclick="changeColor('rgb(115, 204, 198)')"></button>
+            <button class="btn" style="background-color: rgb(232, 228, 198);"
+                onclick="changeColor('rgb(232, 228, 198)')"></button>
+            <button class="btn" style="background-color: rgb(232, 209, 198);"
+                onclick="changeColor('rgb(232, 209, 198)')"></button>
+            <button class="btn" style="background-color: rgb(198, 198, 232);"
+                onclick="changeColor('rgb(198, 198, 232)')"></button>
+            <button class="btn" style="background-color: rgb(198, 232, 204);"
+                onclick="changeColor('rgb(198, 232, 204)')"></button>
+        </div>
+
     </div>
+
 </body>
 
 <script>
 
-    /*============ Script ============*/ 
+    /*============ Script ============*/
 
+
+    // Selecionar o elemento <body>
+    var body = document.querySelector('#mybody');
+    var switched = document.querySelector('#changeName');
     var screen = document.querySelector('#screen');
+    var screenHistory = document.querySelector('#screenHistory');
     var btn = document.querySelectorAll('.btn');
+    var ac = document.querySelector('#ac');
+    var del = document.querySelector('#del');
 
     /*============ Para pegar o valor do botão, Nós usamos o for loop ============*/
     for (item of btn) {
@@ -89,37 +118,57 @@
                 btntext = '/';
             }
             screen.value += btntext;
+            screenHistory.value += btntext;
         });
     }
 
     /*============ Função Seno ============*/
     function sin() {
-        screen.value = Math.sin(screen.value);
+        var anguloGraus = Number(screen.value);
+
+        // Converter o ângulo para radianos
+        var anguloRadianos = anguloGraus * (Math.PI / 180);
+
+        // Calcular o seno do ângulo
+        screen.value = Math.sin(anguloRadianos);
     }
 
     /*============ Função Cosseno ============*/
     function cos() {
-        screen.value = Math.cos(screen.value);
+        var anguloGraus = Number(screen.value);
+
+        // Converter o ângulo para radianos
+        var anguloRadianos = anguloGraus * (Math.PI / 180);
+
+        // Calcular o cosseno do ângulo
+        screen.value = Math.cos(anguloRadianos);
     }
 
     /*============ Função Tangente ============*/
     function tan() {
-        screen.value += Math.tan(screen.value);
+
+        var anguloGraus = Number(screen.value);
+
+        // Converter o ângulo para radianos
+        var anguloRadianos = anguloGraus * (Math.PI / 180);
+
+        // Calcular o tangente do ângulo
+        screen.value = (Math.tan(anguloRadianos) % 2);
     }
 
     /*============ Função Expoente ============*/
     function pow() {
-        screen.value += Math.pow(screen.value, 2);
+        screen.value += Math.pow(Number(screen.value), 2);
     }
 
     /*============ Função Raiz Quadrada ============*/
     function sqrt() {
-        screen.value += Math.sqrt(screen.value, 2);
+        screen.value += Math.sqrt(Number(screen.value), 2);
     }
 
     /*============ Função Logarítmica ============*/
     function log() {
-        screen.value += Math.log(screen.value);
+        screen.value += Math.log(Number(screen.value));
     }
 
     /*============ Função PI(π) ============*/
@@ -149,6 +198,25 @@
     /*============ Função Delete (Del) ============*/
     function del() {
         screen.value = screen.value.substr(0, screen.value.length - 1);
+        screenHistory.value = screen.value;
+    }
+
+    function changeColor(color) {
+        // Alterar a cor de fundo do elemento <body>
+        body.style.backgroundColor = color;
+    }
+
+    function changeLanguage() {
+        if (changeName.textContent == "Portuguese") {
+            changeName.innerText = "Inglês";
+            ac.innerText = "RES";
+            del.innerText = "AP";
+        } else {
+            changeName.innerText = "Portuguese";
+            ac.innerText = "AC";
+            del.innerText = "DEL";
+        }
+
     }
 
 </script>

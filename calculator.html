@@ -53,5 +53,40 @@
 
 </body>
 
+<script> 
+  /*============ Script ============*/ 
+
+  var screen = document.querySelector('#screen');
+    var btn = document.querySelectorAll('.btn');
+
+    /*============ Para pegar o valor do botão, Nós usamos o for loop ============*/
+    for (item of btn) {
+        item.addEventListener('click', (e) => {
+            btntext = e.target.innerText;
+
+            if (btntext == '×') {
+                btntext = '*';
+            }
+
+            if (btntext == '÷') {
+                btntext = '/';
+            }
+            screen.value += btntext;
+        });
+    }
+
+    /*============ Função Seno ============*/
+    function sin() {
+        screen.value = Math.sin(screen.value);
+    }
+
+    /*============ Função Cosseno ============*/
+    function cos() {
+        screen.value = Math.cos(screen.value);
+    }
+
+
+</script>
+
 
 </html>

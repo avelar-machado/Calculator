@@ -130,6 +130,7 @@
         var anguloRadianos = anguloGraus * (Math.PI / 180);
 
         // Calcular o seno do ângulo
+        screenHistory.value += " sin("+screen.value+")";
         screen.value = Math.sin(anguloRadianos);
     }
 
@@ -141,7 +142,9 @@
         var anguloRadianos = anguloGraus * (Math.PI / 180);
 
         // Calcular o cosseno do ângulo
+        screenHistory.value += " cos("+screen.value+")";
         screen.value = Math.cos(anguloRadianos);
+        
     }
 
     /*============ Função Tangente ============*/
@@ -153,32 +156,38 @@
         var anguloRadianos = anguloGraus * (Math.PI / 180);
 
         // Calcular o tangente do ângulo
+        screenHistory.value += " tan("+screen.value+")";
         screen.value = (Math.tan(anguloRadianos) % 2);
     }
 
     /*============ Função Expoente ============*/
     function pow() {
+        screenHistory.value += " ("+screen.value+")^2";
         screen.value = Math.pow(Number(screen.value), 2);
     }
 
     /*============ Função Raiz Quadrada ============*/
     function sqrt() {
         screen.value = Math.sqrt(Number(screen.value), 2);
+        screenHistory.value += " √("+screen.value+")";
     }
 
     /*============ Função Logarítmica ============*/
     function log() {
         screen.value = Math.log(Number(screen.value));
+        screenHistory.value += screen.value;
     }
 
     /*============ Função PI(π) ============*/
     function pi() {
         screen.value += 3.14159265359;
+        screenHistory.value = screen.value;
     }
 
     /*============ Função Euler(e) ============*/
     function e() {
         screen.value += 2.71828182846;
+        screenHistory.value = screen.value;
     }
 
     /*============ Função Factorial ============*/
@@ -193,6 +202,7 @@
         i = i - 1;
 
         screen.value = f;
+        screenHistory.value += " !"+screen.value;
     }
 
     /*============ Função Delete (Del) ============*/
